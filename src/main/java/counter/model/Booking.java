@@ -1,0 +1,220 @@
+package counter.model;
+
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
+import java.io.Serializable;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import javax.xml.bind.annotation.*;
+
+/**
+ * Booking
+ */
+@Validated
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
+@JacksonXmlRootElement(localName = "Booking")
+@XmlRootElement(name = "Booking")
+@XmlAccessorType(XmlAccessType.FIELD)public class Booking  implements Serializable  {
+  private static final long serialVersionUID = 1L;
+
+  @JsonProperty("bookingId")
+  @JacksonXmlProperty(localName = "bookingId")
+  private Integer bookingId = null;
+
+  @JsonProperty("bookingAgent")
+  @JacksonXmlProperty(localName = "bookingAgent")
+  private Integer bookingAgent = null;
+
+  @JsonProperty("patron")
+  @JacksonXmlProperty(localName = "patron")
+  private Integer patron = null;
+
+  @JsonProperty("flight")
+  @JacksonXmlProperty(localName = "flight")
+  private Integer flight = null;
+
+  @JsonProperty("ticketPrice")
+  @JacksonXmlProperty(localName = "ticketPrice")
+  private BigDecimal ticketPrice = null;
+
+  @JsonProperty("numberOfTickets")
+  @JacksonXmlProperty(localName = "numberOfTickets")
+  private Integer numberOfTickets = null;
+
+  public Booking bookingId(Integer bookingId) {
+    this.bookingId = bookingId;
+    return this;
+  }
+
+  /**
+   * Get bookingId
+   * @return bookingId
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public Integer getBookingId() {
+    return bookingId;
+  }
+
+  public void setBookingId(Integer bookingId) {
+    this.bookingId = bookingId;
+  }
+
+  public Booking bookingAgent(Integer bookingAgent) {
+    this.bookingAgent = bookingAgent;
+    return this;
+  }
+
+  /**
+   * Get bookingAgent
+   * @return bookingAgent
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public Integer getBookingAgent() {
+    return bookingAgent;
+  }
+
+  public void setBookingAgent(Integer bookingAgent) {
+    this.bookingAgent = bookingAgent;
+  }
+
+  public Booking patron(Integer patron) {
+    this.patron = patron;
+    return this;
+  }
+
+  /**
+   * Get patron
+   * @return patron
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public Integer getPatron() {
+    return patron;
+  }
+
+  public void setPatron(Integer patron) {
+    this.patron = patron;
+  }
+
+  public Booking flight(Integer flight) {
+    this.flight = flight;
+    return this;
+  }
+
+  /**
+   * Get flight
+   * @return flight
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public Integer getFlight() {
+    return flight;
+  }
+
+  public void setFlight(Integer flight) {
+    this.flight = flight;
+  }
+
+  public Booking ticketPrice(BigDecimal ticketPrice) {
+    this.ticketPrice = ticketPrice;
+    return this;
+  }
+
+  /**
+   * Get ticketPrice
+   * @return ticketPrice
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    @Valid
+    public BigDecimal getTicketPrice() {
+    return ticketPrice;
+  }
+
+  public void setTicketPrice(BigDecimal ticketPrice) {
+    this.ticketPrice = ticketPrice;
+  }
+
+  public Booking numberOfTickets(Integer numberOfTickets) {
+    this.numberOfTickets = numberOfTickets;
+    return this;
+  }
+
+  /**
+   * Get numberOfTickets
+   * @return numberOfTickets
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public Integer getNumberOfTickets() {
+    return numberOfTickets;
+  }
+
+  public void setNumberOfTickets(Integer numberOfTickets) {
+    this.numberOfTickets = numberOfTickets;
+  }
+
+
+  @Override
+  public boolean equals(java.lang.Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Booking booking = (Booking) o;
+    return Objects.equals(this.bookingId, booking.bookingId) &&
+        Objects.equals(this.bookingAgent, booking.bookingAgent) &&
+        Objects.equals(this.patron, booking.patron) &&
+        Objects.equals(this.flight, booking.flight) &&
+        Objects.equals(this.ticketPrice, booking.ticketPrice) &&
+        Objects.equals(this.numberOfTickets, booking.numberOfTickets);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(bookingId, bookingAgent, patron, flight, ticketPrice, numberOfTickets);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class Booking {\n");
+    
+    sb.append("    bookingId: ").append(toIndentedString(bookingId)).append("\n");
+    sb.append("    bookingAgent: ").append(toIndentedString(bookingAgent)).append("\n");
+    sb.append("    patron: ").append(toIndentedString(patron)).append("\n");
+    sb.append("    flight: ").append(toIndentedString(flight)).append("\n");
+    sb.append("    ticketPrice: ").append(toIndentedString(ticketPrice)).append("\n");
+    sb.append("    numberOfTickets: ").append(toIndentedString(numberOfTickets)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(java.lang.Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+}
