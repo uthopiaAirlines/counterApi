@@ -1,7 +1,5 @@
 package counter.api;
 
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -36,15 +34,15 @@ public class UsersApiController implements UsersApi {
         this.request = request;
     }
 
-    @Override
-    public Optional<ObjectMapper> getObjectMapper() {
-        return Optional.ofNullable(objectMapper);
-    }
+    // @Override
+    // public Optional<ObjectMapper> getObjectMapper() {
+    //     return Optional.ofNullable(objectMapper);
+    // }
 
-    @Override
-    public Optional<HttpServletRequest> getRequest() {
-        return Optional.ofNullable(request);
-    }
+    // @Override
+    // public Optional<HttpServletRequest> getRequest() {
+    //     return Optional.ofNullable(request);
+    // }
 
     @Override
     public ResponseEntity<Void> usersPost(@ApiParam(value = "", required = true) @Valid @RequestBody User body) {

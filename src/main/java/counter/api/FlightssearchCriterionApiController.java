@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,15 +36,15 @@ public class FlightssearchCriterionApiController implements FlightssearchCriteri
         this.request = request;
     }
 
-    @Override
-    public Optional<ObjectMapper> getObjectMapper() {
-        return Optional.ofNullable(objectMapper);
-    }
+    // @Override
+    // public Optional<ObjectMapper> getObjectMapper() {
+    //     return Optional.ofNullable(objectMapper);
+    // }
 
-    @Override
-    public Optional<HttpServletRequest> getRequest() {
-        return Optional.ofNullable(request);
-    }
+    // @Override
+    // public Optional<HttpServletRequest> getRequest() {
+    //     return Optional.ofNullable(request);
+    // }
 
     @Override
     public ResponseEntity<List<Flight>> flightssearchCriterionGet(
