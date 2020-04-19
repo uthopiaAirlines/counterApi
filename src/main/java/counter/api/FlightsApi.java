@@ -32,17 +32,17 @@ public interface FlightsApi {
 
     Logger log = LoggerFactory.getLogger(FlightsApi.class);
 
-    default Optional<ObjectMapper> getObjectMapper() {
-        return Optional.empty();
-    }
+    // default Optional<ObjectMapper> getObjectMapper() {
+    //     return Optional.empty();
+    // }
 
-    default Optional<HttpServletRequest> getRequest() {
-        return Optional.empty();
-    }
+    // default Optional<HttpServletRequest> getRequest() {
+    //     return Optional.empty();
+    // }
 
-    default Optional<String> getAcceptHeader() {
-        return getRequest().map(r -> r.getHeader("Accept"));
-    }
+    // default Optional<String> getAcceptHeader() {
+    //     return getRequest().map(r -> r.getHeader("Accept"));
+    // }
 
     @ApiOperation(value = "Get all flights", nickname = "flightsGet", notes = "", response = Flight.class, responseContainer = "List", tags = {
             "Flight", })
@@ -51,20 +51,20 @@ public interface FlightsApi {
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
     @RequestMapping(value = "/flights", produces = { "application/json", "text/plain" }, method = RequestMethod.GET)
     default ResponseEntity<List<Flight>> flightsGet() {
-        if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-            if (getAcceptHeader().get().contains("application/json")) {
-                try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("", List.class),
-                            HttpStatus.NOT_IMPLEMENTED);
-                } catch (IOException e) {
-                    log.error("Couldn't serialize response for content type application/json", e);
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-        } else {
-            log.warn(
-                    "ObjectMapper or HttpServletRequest not configured in default FlightsApi interface so no example is generated");
-        }
+        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        //     if (getAcceptHeader().get().contains("application/json")) {
+        //         try {
+        //             return new ResponseEntity<>(getObjectMapper().get().readValue("", List.class),
+        //                     HttpStatus.NOT_IMPLEMENTED);
+        //         } catch (IOException e) {
+        //             log.error("Couldn't serialize response for content type application/json", e);
+        //             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        //         }
+        //     }
+        // } else {
+        //     log.warn(
+        //             "ObjectMapper or HttpServletRequest not configured in default FlightsApi interface so no example is generated");
+        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

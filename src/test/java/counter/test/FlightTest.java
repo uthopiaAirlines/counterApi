@@ -1,6 +1,8 @@
-package test;
+package counter.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -43,8 +45,9 @@ public class FlightTest {
 
     @Test
     public void arrivalTimeTest() {
-        Flight flight1 = flight.arrivalTime(OffsetDateTime.now().plusDays(1));
-        assertEquals(OffsetDateTime.now().plusDays(1), flight1.getArrivalTime());
+        OffsetDateTime now = OffsetDateTime.now();
+        Flight flight1 = flight.arrivalTime(now.plusDays(1));
+        assertEquals(now.plusDays(1), flight1.getArrivalTime());
     }
 
     @Test
@@ -61,8 +64,9 @@ public class FlightTest {
 
     @Test
     public void departureTimeTest() {
-        Flight flight1 = flight.departureTime(OffsetDateTime.now().plusDays(1));
-        assertEquals(OffsetDateTime.now().plusDays(1), flight1.getDepartureTime());
+        OffsetDateTime now = OffsetDateTime.now();
+        Flight flight1 = flight.departureTime(now.plusDays(1));
+        assertEquals(now.plusDays(1), flight1.getDepartureTime());
     }
 
     @Test
@@ -77,29 +81,44 @@ public class FlightTest {
         assertEquals(BigDecimal.valueOf(17.99), flight1.getPrice());
     }
 
-    // private void blah() {
-    //     flight.airline(airline);
-    //     flight.arrivalLocation(arrivalLocation);
-    //     flight.arrivalTime(arrivalTime);
-    //     flight.availableSeats(availableSeats);
-    //     flight.departureLocation(departureLocation);
-    //     flight.departureTime(departureTime);
-    //     flight.flightId(flightId);
-    //     flight.getAirline();
-    //     flight.getArrivalLocation();
-    //     flight.getArrivalTime();
-    //     flight.getAvailableSeats();
-    //     flight.getDepartureLocation();
-    //     flight.getDepartureTime();
-    //     flight.getFlightId();
-    //     flight.getPrice();
-    //     flight.price(price);
-    //     flight.setAirline(airline);
-    //     flight.setArrivalLocation(arrivalLocation);
-    //     flight.setArrivalTime(arrivalTime);
-    //     flight.setAvailableSeats(availableSeats);
-    //     flight.setDepartureLocation(departureLocation);
-    //     flight.setDepartureTime(departureTime);
-    //     flight.setPrice(price);
-    // }
+    @Test
+    public void toStringTest() {
+        assertEquals(String.class, flight.toString().getClass());
+        flight.setAirline(null);
+        assertEquals(String.class, flight.toString().getClass());
+    }
+
+    @Test
+    public void equalsTest() {
+        Flight flight1 = new Flight();
+        OffsetDateTime now = OffsetDateTime.now();
+        flight.setAirline(1);
+        flight.setArrivalLocation(1);
+        flight.setArrivalTime(now);
+        flight.setAvailableSeats(1);
+        flight.setDepartureLocation(1);
+        flight.setDepartureTime(now.minusDays(3));
+        flight.setFlightId(1);
+        flight.setPrice(BigDecimal.valueOf(15.99));
+        flight1.setAirline(1);
+        flight1.setArrivalLocation(1);
+        flight1.setArrivalTime(now);
+        flight1.setAvailableSeats(1);
+        flight1.setDepartureLocation(1);
+        flight1.setDepartureTime(now.minusDays(3));
+        flight1.setFlightId(1);
+        flight1.setPrice(BigDecimal.valueOf(15.99));
+        assertTrue(flight.equals(flight1));
+        assertTrue(flight.equals(flight.airline(1)));
+        flight1.setAirline(10);
+        assertFalse(flight.equals(flight1));
+        assertFalse(flight.equals(null));
+        assertEquals(Integer.class, Integer.valueOf(flight.hashCode()).getClass());
+    }
+
+    @Test
+    public void constructorTest() {
+        Flight flight1 = new Flight();
+        Flight flight2 = new Flight(1);
+    }
 }

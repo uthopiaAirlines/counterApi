@@ -34,17 +34,17 @@ public interface FlightssearchCriterionApi {
 
     Logger log = LoggerFactory.getLogger(FlightssearchCriterionApi.class);
 
-    default Optional<ObjectMapper> getObjectMapper() {
-        return Optional.empty();
-    }
+    // default Optional<ObjectMapper> getObjectMapper() {
+    //     return Optional.empty();
+    // }
 
-    default Optional<HttpServletRequest> getRequest() {
-        return Optional.empty();
-    }
+    // default Optional<HttpServletRequest> getRequest() {
+    //     return Optional.empty();
+    // }
 
-    default Optional<String> getAcceptHeader() {
-        return getRequest().map(r -> r.getHeader("Accept"));
-    }
+    // default Optional<String> getAcceptHeader() {
+    //     return getRequest().map(r -> r.getHeader("Accept"));
+    // }
 
     @ApiOperation(value = "Get all the flights that have the search criterion within them", nickname = "flightssearchCriterionGet", notes = "", response = Flight.class, tags = {
             "Flight", })
@@ -55,21 +55,21 @@ public interface FlightssearchCriterionApi {
             "text/plain" }, method = RequestMethod.GET)
     default ResponseEntity<List<Flight>> flightssearchCriterionGet(
             @ApiParam(value = "", required = true) @PathVariable("searchCriterion") String searchCriterion) {
-        if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-            if (getAcceptHeader().get().contains("application/json")) {
-                try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue(
-                            "[{\n  \"departureTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"departureLocation\" : 5,\n  \"arrivalTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"availableSeats\" : 5,\n  \"price\" : 2.3021358869347655,\n  \"flightId\" : 0,\n  \"airline\" : 6,\n  \"arrivalLocation\" : 1\n]}",
-                            List.class), HttpStatus.NOT_IMPLEMENTED);
-                } catch (IOException e) {
-                    log.error("Couldn't serialize response for content type application/json", e);
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-        } else {
-            log.warn(
-                    "ObjectMapper or HttpServletRequest not configured in default FlightssearchCriterionApi interface so no example is generated");
-        }
+        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        //     if (getAcceptHeader().get().contains("application/json")) {
+        //         try {
+        //             return new ResponseEntity<>(getObjectMapper().get().readValue(
+        //                     "[{\n  \"departureTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"departureLocation\" : 5,\n  \"arrivalTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"availableSeats\" : 5,\n  \"price\" : 2.3021358869347655,\n  \"flightId\" : 0,\n  \"airline\" : 6,\n  \"arrivalLocation\" : 1\n]}",
+        //                     List.class), HttpStatus.NOT_IMPLEMENTED);
+        //         } catch (IOException e) {
+        //             log.error("Couldn't serialize response for content type application/json", e);
+        //             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        //         }
+        //     }
+        // } else {
+        //     log.warn(
+        //             "ObjectMapper or HttpServletRequest not configured in default FlightssearchCriterionApi interface so no example is generated");
+        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

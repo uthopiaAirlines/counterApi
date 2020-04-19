@@ -58,10 +58,11 @@ public class BookingsApiController implements BookingsApi {
             return new ResponseEntity<Void>(HttpStatus.CREATED);
         } catch (IllegalArgumentException ire) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e.getClass());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        } 
+        // catch (Exception e) {
+        //     log.error(e.getMessage(), e.getClass());
+        //     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
     }
 
     @Override

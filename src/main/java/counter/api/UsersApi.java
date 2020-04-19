@@ -34,17 +34,17 @@ public interface UsersApi {
 
     Logger log = LoggerFactory.getLogger(UsersApi.class);
 
-    default Optional<ObjectMapper> getObjectMapper() {
-        return Optional.empty();
-    }
+    // default Optional<ObjectMapper> getObjectMapper() {
+    //     return Optional.empty();
+    // }
 
-    default Optional<HttpServletRequest> getRequest() {
-        return Optional.empty();
-    }
+    // default Optional<HttpServletRequest> getRequest() {
+    //     return Optional.empty();
+    // }
 
-    default Optional<String> getAcceptHeader() {
-        return getRequest().map(r -> r.getHeader("Accept"));
-    }
+    // default Optional<String> getAcceptHeader() {
+    //     return getRequest().map(r -> r.getHeader("Accept"));
+    // }
 
     @ApiOperation(value = "Creating a new user", nickname = "usersPost", notes = "", tags = { "Users", })
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created new User"),
@@ -52,11 +52,11 @@ public interface UsersApi {
     @RequestMapping(value = "/users", produces = { "text/plain" }, consumes = {
             "application/json" }, method = RequestMethod.POST)
     default ResponseEntity<Void> usersPost(@ApiParam(value = "", required = true) @Valid @RequestBody User body) {
-        if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        } else {
-            log.warn(
-                    "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
-        }
+        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        // } else {
+        //     log.warn(
+        //             "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
+        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -67,11 +67,11 @@ public interface UsersApi {
     @RequestMapping(value = "/users/{username}", produces = { "text/plain" }, method = RequestMethod.DELETE)
     default ResponseEntity<Void> usersUserIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
-        if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        } else {
-            log.warn(
-                    "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
-        }
+        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        // } else {
+        //     log.warn(
+        //             "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
+        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -82,11 +82,11 @@ public interface UsersApi {
             "application/json" }, method = RequestMethod.PUT)
     default ResponseEntity<Void> usersUserIdPut(@ApiParam(value = "", required = true) @Valid @RequestBody User body,
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
-        if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        } else {
-            log.warn(
-                    "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
-        }
+        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        // } else {
+        //     log.warn(
+        //             "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
+        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

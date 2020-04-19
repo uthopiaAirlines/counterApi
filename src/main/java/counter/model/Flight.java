@@ -38,7 +38,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Flight implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  Flight(Integer flightId) {
+  public Flight(Integer flightId) {
     this.flightId = flightId;
   }
 
