@@ -1,18 +1,9 @@
 package counter.model;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.io.Serializable;
-
-import org.springframework.lang.Nullable;
-import org.springframework.validation.annotation.Validated;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +12,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import org.springframework.lang.Nullable;
+import org.springframework.validation.annotation.Validated;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Booking
@@ -35,13 +35,14 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "Booking")
 @Entity
 @Table(name = "bookings")
-@XmlAccessorType(XmlAccessType.FIELD)public class Booking  implements Serializable  {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Booking implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @JsonProperty("bookingId")
   @JacksonXmlProperty(localName = "bookingId")
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer bookingId = null;
 
   @JsonProperty("bookingAgent")
@@ -57,7 +58,7 @@ import javax.xml.bind.annotation.*;
   @JsonProperty("flight")
   @JacksonXmlProperty(localName = "flight")
   @ManyToOne(optional = false)
-  @JoinColumn(name="flight", nullable=false, updatable=false, referencedColumnName = "flightId")
+  @JoinColumn(name = "flight", nullable = false, updatable = false, referencedColumnName = "flightId")
   private Flight flight = null;
 
   @JsonProperty("ticketPrice")
@@ -77,11 +78,12 @@ import javax.xml.bind.annotation.*;
 
   /**
    * Get bookingId
+   * 
    * @return bookingId
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
 
-    public Integer getBookingId() {
+  public Integer getBookingId() {
     return bookingId;
   }
 
@@ -96,11 +98,12 @@ import javax.xml.bind.annotation.*;
 
   /**
    * Get bookingAgent
+   * 
    * @return bookingAgent
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
 
-    public String getBookingAgent() {
+  public String getBookingAgent() {
     return bookingAgent;
   }
 
@@ -115,12 +118,13 @@ import javax.xml.bind.annotation.*;
 
   /**
    * Get patron
+   * 
    * @return patron
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public String getPatron() {
+  public String getPatron() {
     return patron;
   }
 
@@ -135,12 +139,13 @@ import javax.xml.bind.annotation.*;
 
   /**
    * Get flight
+   * 
    * @return flight
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Flight getFlight() {
+  public Flight getFlight() {
     return flight;
   }
 
@@ -155,13 +160,14 @@ import javax.xml.bind.annotation.*;
 
   /**
    * Get ticketPrice
+   * 
    * @return ticketPrice
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public BigDecimal getTicketPrice() {
+  @Valid
+  public BigDecimal getTicketPrice() {
     return ticketPrice;
   }
 
@@ -176,19 +182,19 @@ import javax.xml.bind.annotation.*;
 
   /**
    * Get numberOfTickets
+   * 
    * @return numberOfTickets
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Integer getNumberOfTickets() {
+  public Integer getNumberOfTickets() {
     return numberOfTickets;
   }
 
   public void setNumberOfTickets(Integer numberOfTickets) {
     this.numberOfTickets = numberOfTickets;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -199,12 +205,10 @@ import javax.xml.bind.annotation.*;
       return false;
     }
     Booking booking = (Booking) o;
-    return Objects.equals(this.bookingId, booking.bookingId) &&
-        Objects.equals(this.bookingAgent, booking.bookingAgent) &&
-        Objects.equals(this.patron, booking.patron) &&
-        Objects.equals(this.flight, booking.flight) &&
-        Objects.equals(this.ticketPrice, booking.ticketPrice) &&
-        Objects.equals(this.numberOfTickets, booking.numberOfTickets);
+    return Objects.equals(this.bookingId, booking.bookingId) && Objects.equals(this.bookingAgent, booking.bookingAgent)
+        && Objects.equals(this.patron, booking.patron) && Objects.equals(this.flight, booking.flight)
+        && Objects.equals(this.ticketPrice, booking.ticketPrice)
+        && Objects.equals(this.numberOfTickets, booking.numberOfTickets);
   }
 
   @Override
@@ -216,7 +220,7 @@ import javax.xml.bind.annotation.*;
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Booking {\n");
-    
+
     sb.append("    bookingId: ").append(toIndentedString(bookingId)).append("\n");
     sb.append("    bookingAgent: ").append(toIndentedString(bookingAgent)).append("\n");
     sb.append("    patron: ").append(toIndentedString(patron)).append("\n");

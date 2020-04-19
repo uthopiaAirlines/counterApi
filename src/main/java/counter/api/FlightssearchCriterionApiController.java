@@ -1,5 +1,13 @@
 package counter.api;
 
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import counter.model.Flight;
 import counter.service.FlightService;
 import io.swagger.annotations.ApiParam;
 
-import javax.servlet.http.HttpServletRequest;
-
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.Optional;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
 @Controller
 public class FlightssearchCriterionApiController implements FlightssearchCriterionApi {
@@ -48,10 +48,11 @@ public class FlightssearchCriterionApiController implements FlightssearchCriteri
     }
 
     @Override
-    public ResponseEntity<List<Flight>> flightssearchCriterionGet(@ApiParam(value = "",required=true) @PathVariable("searchCriterion") String searchCriterion) {
+    public ResponseEntity<List<Flight>> flightssearchCriterionGet(
+            @ApiParam(value = "", required = true) @PathVariable("searchCriterion") String searchCriterion) {
         try {
             Integer i = Integer.valueOf(searchCriterion);
-            return new ResponseEntity<List<Flight>>(flightService.getFlightsByCriterion(i),HttpStatus.OK);
+            return new ResponseEntity<List<Flight>>(flightService.getFlightsByCriterion(i), HttpStatus.OK);
         } catch (NumberFormatException nfe) {
             // Continue to other types
         }

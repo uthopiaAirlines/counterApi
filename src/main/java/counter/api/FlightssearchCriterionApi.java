@@ -5,42 +5,40 @@
  */
 package counter.api;
 
-import counter.model.Flight;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.CookieValue;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import counter.model.Flight;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
 @Api(value = "flights:{searchCriterion}", description = "the flights:{searchCriterion} API")
 public interface FlightssearchCriterionApi {
 
     Logger log = LoggerFactory.getLogger(FlightssearchCriterionApi.class);
 
-    default Optional<ObjectMapper> getObjectMapper(){
+    default Optional<ObjectMapper> getObjectMapper() {
         return Optional.empty();
     }
 
-    default Optional<HttpServletRequest> getRequest(){
+    default Optional<HttpServletRequest> getRequest() {
         return Optional.empty();
     }
 
@@ -48,26 +46,29 @@ public interface FlightssearchCriterionApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
-    @ApiOperation(value = "Get all the flights that have the search criterion within them", nickname = "flightssearchCriterionGet", notes = "", response = Flight.class, tags={ "Flight", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Successfully got the list of flights by search criterion", response = Flight.class),
-        @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
-    @RequestMapping(value = "/flights:{searchCriterion}",
-        produces = { "application/json", "text/plain" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<List<Flight>> flightssearchCriterionGet(@ApiParam(value = "",required=true) @PathVariable("searchCriterion") String searchCriterion
-) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+    @ApiOperation(value = "Get all the flights that have the search criterion within them", nickname = "flightssearchCriterionGet", notes = "", response = Flight.class, tags = {
+            "Flight", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully got the list of flights by search criterion", response = Flight.class),
+            @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
+    @RequestMapping(value = "/flights:{searchCriterion}", produces = { "application/json",
+            "text/plain" }, method = RequestMethod.GET)
+    default ResponseEntity<List<Flight>> flightssearchCriterionGet(
+            @ApiParam(value = "", required = true) @PathVariable("searchCriterion") String searchCriterion) {
+        if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[{\n  \"departureTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"departureLocation\" : 5,\n  \"arrivalTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"availableSeats\" : 5,\n  \"price\" : 2.3021358869347655,\n  \"flightId\" : 0,\n  \"airline\" : 6,\n  \"arrivalLocation\" : 1\n]}", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue(
+                            "[{\n  \"departureTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"departureLocation\" : 5,\n  \"arrivalTime\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"availableSeats\" : 5,\n  \"price\" : 2.3021358869347655,\n  \"flightId\" : 0,\n  \"airline\" : 6,\n  \"arrivalLocation\" : 1\n]}",
+                            List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
         } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default FlightssearchCriterionApi interface so no example is generated");
+            log.warn(
+                    "ObjectMapper or HttpServletRequest not configured in default FlightssearchCriterionApi interface so no example is generated");
         }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
