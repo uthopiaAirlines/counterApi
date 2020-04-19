@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Swagger2SpringBoot<Counter>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "counter.Swagger2SpringBoot",
+            "projectName": "Counter",
+            "args": ""
+        }
+    ]
+}

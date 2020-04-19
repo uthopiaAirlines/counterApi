@@ -31,13 +31,22 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "Flight")
 @Entity
 @Table(name = "flights")
-@XmlAccessorType(XmlAccessType.FIELD)public class Flight  implements Serializable  {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Flight implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  Flight(Integer flightId) {
+    this.flightId = flightId;
+  }
+
+  Flight() {
+    
+  }
 
   @JsonProperty("flightId")
   @JacksonXmlProperty(localName = "flightId")
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer flightId = null;
 
   @JsonProperty("airline")
@@ -75,199 +84,205 @@ import javax.xml.bind.annotation.*;
   @Column(name = "price", nullable = false)
   private BigDecimal price = null;
 
-  public Flight flightId(Integer flightId) {
+  public Flight flightId(final Integer flightId) {
     this.flightId = flightId;
     return this;
   }
 
   /**
    * Get flightId
+   * 
    * @return flightId
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Integer getFlightId() {
+  public Integer getFlightId() {
     return flightId;
   }
 
-  public void setFlightId(Integer flightId) {
+  public void setFlightId(final Integer flightId) {
     this.flightId = flightId;
   }
 
-  public Flight airline(Integer airline) {
+  public Flight airline(final Integer airline) {
     this.airline = airline;
     return this;
   }
 
   /**
    * Get airline
+   * 
    * @return airline
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Integer getAirline() {
+  public Integer getAirline() {
     return airline;
   }
 
-  public void setAirline(Integer airline) {
+  public void setAirline(final Integer airline) {
     this.airline = airline;
   }
 
-  public Flight arrivalTime(OffsetDateTime arrivalTime) {
+  public Flight arrivalTime(final OffsetDateTime arrivalTime) {
     this.arrivalTime = arrivalTime;
     return this;
   }
 
   /**
    * Get arrivalTime
+   * 
    * @return arrivalTime
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public OffsetDateTime getArrivalTime() {
+  @Valid
+  public OffsetDateTime getArrivalTime() {
     return arrivalTime;
   }
 
-  public void setArrivalTime(OffsetDateTime arrivalTime) {
+  public void setArrivalTime(final OffsetDateTime arrivalTime) {
     this.arrivalTime = arrivalTime;
   }
 
-  public Flight arrivalLocation(Integer arrivalLocation) {
+  public Flight arrivalLocation(final Integer arrivalLocation) {
     this.arrivalLocation = arrivalLocation;
     return this;
   }
 
   /**
    * Get arrivalLocation
+   * 
    * @return arrivalLocation
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Integer getArrivalLocation() {
+  public Integer getArrivalLocation() {
     return arrivalLocation;
   }
 
-  public void setArrivalLocation(Integer arrivalLocation) {
+  public void setArrivalLocation(final Integer arrivalLocation) {
     this.arrivalLocation = arrivalLocation;
   }
 
-  public Flight departureTime(OffsetDateTime departureTime) {
+  public Flight departureTime(final OffsetDateTime departureTime) {
     this.departureTime = departureTime;
     return this;
   }
 
   /**
    * Get departureTime
+   * 
    * @return departureTime
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public OffsetDateTime getDepartureTime() {
+  @Valid
+  public OffsetDateTime getDepartureTime() {
     return departureTime;
   }
 
-  public void setDepartureTime(OffsetDateTime departureTime) {
+  public void setDepartureTime(final OffsetDateTime departureTime) {
     this.departureTime = departureTime;
   }
 
-  public Flight departureLocation(Integer departureLocation) {
+  public Flight departureLocation(final Integer departureLocation) {
     this.departureLocation = departureLocation;
     return this;
   }
 
   /**
    * Get departureLocation
+   * 
    * @return departureLocation
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Integer getDepartureLocation() {
+  public Integer getDepartureLocation() {
     return departureLocation;
   }
 
-  public void setDepartureLocation(Integer departureLocation) {
+  public void setDepartureLocation(final Integer departureLocation) {
     this.departureLocation = departureLocation;
   }
 
-  public Flight availableSeats(Integer availableSeats) {
+  public Flight availableSeats(final Integer availableSeats) {
     this.availableSeats = availableSeats;
     return this;
   }
 
   /**
    * Get availableSeats
+   * 
    * @return availableSeats
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    public Integer getAvailableSeats() {
+  public Integer getAvailableSeats() {
     return availableSeats;
   }
 
-  public void setAvailableSeats(Integer availableSeats) {
+  public void setAvailableSeats(final Integer availableSeats) {
     this.availableSeats = availableSeats;
   }
 
-  public Flight price(BigDecimal price) {
+  public Flight price(final BigDecimal price) {
     this.price = price;
     return this;
   }
 
   /**
    * Get price
+   * 
    * @return price
-  **/
+   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
+  @NotNull
 
-    @Valid
-    public BigDecimal getPrice() {
+  @Valid
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(final BigDecimal price) {
     this.price = price;
   }
 
-
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(final java.lang.Object o) {
     if (this == o) {
       return true;
     }
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Flight flight = (Flight) o;
-    return Objects.equals(this.flightId, flight.flightId) &&
-        Objects.equals(this.airline, flight.airline) &&
-        Objects.equals(this.arrivalTime, flight.arrivalTime) &&
-        Objects.equals(this.arrivalLocation, flight.arrivalLocation) &&
-        Objects.equals(this.departureTime, flight.departureTime) &&
-        Objects.equals(this.departureLocation, flight.departureLocation) &&
-        Objects.equals(this.availableSeats, flight.availableSeats) &&
-        Objects.equals(this.price, flight.price);
+    final Flight flight = (Flight) o;
+    return Objects.equals(this.flightId, flight.flightId) && Objects.equals(this.airline, flight.airline)
+        && Objects.equals(this.arrivalTime, flight.arrivalTime)
+        && Objects.equals(this.arrivalLocation, flight.arrivalLocation)
+        && Objects.equals(this.departureTime, flight.departureTime)
+        && Objects.equals(this.departureLocation, flight.departureLocation)
+        && Objects.equals(this.availableSeats, flight.availableSeats) && Objects.equals(this.price, flight.price);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(flightId, airline, arrivalTime, arrivalLocation, departureTime, departureLocation, availableSeats, price);
+    return Objects.hash(flightId, airline, arrivalTime, arrivalLocation, departureTime, departureLocation,
+        availableSeats, price);
   }
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
+    final StringBuilder sb = new StringBuilder();
     sb.append("class Flight {\n");
-    
+
     sb.append("    flightId: ").append(toIndentedString(flightId)).append("\n");
     sb.append("    airline: ").append(toIndentedString(airline)).append("\n");
     sb.append("    arrivalTime: ").append(toIndentedString(arrivalTime)).append("\n");
@@ -284,7 +299,7 @@ import javax.xml.bind.annotation.*;
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(final java.lang.Object o) {
     if (o == null) {
       return "null";
     }

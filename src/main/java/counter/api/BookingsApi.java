@@ -83,4 +83,29 @@ public interface BookingsApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+
+
+    @ApiOperation(value = "Get all bookings by user", nickname = "usersUserIdBookingsGet", notes = "", response = Booking.class, responseContainer = "List", tags={ "Booking","Users", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successfully returned a list of artists", response = Booking.class, responseContainer = "List") })
+    @RequestMapping(value = "/bookings/{patron}",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    default ResponseEntity<List<Booking>> usersUserIdBookingsGet(@ApiParam(value = "User to find bookings by",required=true) @PathVariable("patron") String patron
+) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+            if (getAcceptHeader().get().contains("application/json")) {
+                try {
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {\n  \"bookingAgent\" : 6,\n  \"flight\" : 5,\n  \"patron\" : 1,\n  \"ticketPrice\" : 5.637376656633329,\n  \"numberOfTickets\" : 2,\n  \"bookingId\" : 0\n}, {\n  \"bookingAgent\" : 6,\n  \"flight\" : 5,\n  \"patron\" : 1,\n  \"ticketPrice\" : 5.637376656633329,\n  \"numberOfTickets\" : 2,\n  \"bookingId\" : 0\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                } catch (IOException e) {
+                    log.error("Couldn't serialize response for content type application/json", e);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
 }

@@ -67,6 +67,10 @@ import javax.xml.bind.annotation.*;
   @JsonProperty("name")
   @JacksonXmlProperty(localName = "name")
   private String name = null;
+  
+  @JsonProperty("username")
+  @JacksonXmlProperty(localName = "username")
+  private String username = null;
 
   @JsonProperty("address")
   @JacksonXmlProperty(localName = "address")
@@ -94,7 +98,6 @@ import javax.xml.bind.annotation.*;
    * @return userId
   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
 
     public Integer getUserId() {
     return userId;
@@ -114,7 +117,6 @@ import javax.xml.bind.annotation.*;
    * @return userRole
   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
 
     public UserRoleEnum getUserRole() {
     return userRole;
@@ -142,6 +144,26 @@ import javax.xml.bind.annotation.*;
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public User username(String username) {
+    this.username = username;
+    return this;
+  }
+
+  /**
+   * Get username
+   * @return username
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public User address(String address) {

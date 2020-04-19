@@ -67,39 +67,15 @@ public interface UsersApi {
     }
 
 
-    @ApiOperation(value = "Get all bookings by user", nickname = "usersUserIdBookingsGet", notes = "", response = Booking.class, responseContainer = "List", tags={ "Booking","Users", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Successfully returned a list of artists", response = Booking.class, responseContainer = "List") })
-    @RequestMapping(value = "/users/{userId}/bookings/",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<List<Booking>> usersUserIdBookingsGet(@ApiParam(value = "User to find bookings by",required=true) @PathVariable("userId") Integer userId
-) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-            if (getAcceptHeader().get().contains("application/json")) {
-                try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {\n  \"bookingAgent\" : 6,\n  \"flight\" : 5,\n  \"patron\" : 1,\n  \"ticketPrice\" : 5.637376656633329,\n  \"numberOfTickets\" : 2,\n  \"bookingId\" : 0\n}, {\n  \"bookingAgent\" : 6,\n  \"flight\" : 5,\n  \"patron\" : 1,\n  \"ticketPrice\" : 5.637376656633329,\n  \"numberOfTickets\" : 2,\n  \"bookingId\" : 0\n} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-                } catch (IOException e) {
-                    log.error("Couldn't serialize response for content type application/json", e);
-                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-        } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-
     @ApiOperation(value = "Delete a user", nickname = "usersUserIdDelete", notes = "", tags={ "Users", })
     @ApiResponses(value = { 
         @ApiResponse(code = 204, message = "Successfully deleted User"),
         @ApiResponse(code = 400, message = "Invalid Request", response = String.class),
         @ApiResponse(code = 404, message = "User not found") })
-    @RequestMapping(value = "/users/{userId}",
+    @RequestMapping(value = "/users/{username}",
         produces = { "text/plain" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<Void> usersUserIdDelete(@ApiParam(value = "",required=true) @PathVariable("userId") Integer userId
+    default ResponseEntity<Void> usersUserIdDelete(@ApiParam(value = "",required=true) @PathVariable("username") String username
 ) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
@@ -113,12 +89,12 @@ public interface UsersApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Successfully updated User"),
         @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
-    @RequestMapping(value = "/users/{userId}",
+    @RequestMapping(value = "/users/{username}",
         produces = { "text/plain" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
     default ResponseEntity<Void> usersUserIdPut(@ApiParam(value = "" ,required=true )  @Valid @RequestBody User body
-,@ApiParam(value = "",required=true) @PathVariable("userId") Integer userId
+,@ApiParam(value = "",required=true) @PathVariable("username") String username
 ) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
