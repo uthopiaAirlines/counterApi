@@ -43,7 +43,10 @@ public class FlightsApiController implements FlightsApi {
 
     @Override
     public ResponseEntity<List<Flight>> flightsGet() {
-        return new ResponseEntity<List<Flight>>(flightService.getFlights(), HttpStatus.OK);
+        List<Flight> result = flightService.getFlights();
+        if (result.isEmpty())
+            return new ResponseEntity<List<Flight>>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<List<Flight>>(result, HttpStatus.OK);
     }
 
 }

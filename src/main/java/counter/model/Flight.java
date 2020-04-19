@@ -42,7 +42,7 @@ public class Flight implements Serializable {
     this.flightId = flightId;
   }
 
-  Flight() {
+  public Flight() {
 
   }
 

@@ -10,8 +10,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import counter.model.User;
+import software.amazon.awssdk.core.exception.SdkException;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminConfirmSignUpRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AdminDeleteUserRequest;
@@ -22,11 +24,12 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpReque
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpResponse;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.UpdateUserAttributesRequest;
 
+@Service
 public class UserService {
     Logger log = LoggerFactory.getLogger(UserService.class);
     CognitoIdentityProviderClient client = CognitoIdentityProviderClient.create();
 
-    public Integer saveUser(User user) {
+    public void saveUser(User user) {
         AttributeType aType1 = AttributeType.builder().name("email").value(user.getEmail()).build();
 
         AttributeType aType2 = AttributeType.builder().name("phone_number").value(user.getPhone()).build();
@@ -44,14 +47,16 @@ public class UserService {
             SignUpResponse result = client.signUp(signUpRequest);
             client.adminConfirmSignUp(confirmSignUpRequest);
             log.info(result.toString());
-            return 201;
+        } catch (SdkException e) {
+            log.error(e.getMessage());
+            throw e;
         } catch (Exception e) {
             log.error(e.getMessage(), e.fillInStackTrace());
-            return 500;
+            throw e;
         }
     }
 
-    public Integer updateUser(String username, User user) {
+    public void updateUser(String username, User user) {
         Map<String, String> authParameters = new HashMap<String, String>();
         authParameters.put("USERNAME", username);
         authParameters.put("PASSWORD", user.getPassword());
@@ -64,9 +69,12 @@ public class UserService {
         try {
             AdminInitiateAuthResponse authResponse = client.adminInitiateAuth(authRequest);
             accessToken = authResponse.authenticationResult().accessToken();
+        } catch (SdkException e) {
+            log.error(e.getMessage());
+            throw e;
         } catch (Exception e) {
             log.error(e.getMessage(), e.fillInStackTrace());
-            return 500;
+            throw e;
         }
         AttributeType aType1 = AttributeType.builder().name("email").value(user.getEmail()).build();
 
@@ -78,23 +86,27 @@ public class UserService {
                 .accessToken(accessToken).userAttributes(new AttributeType[] { aType1, aType2, aType3 }).build();
         try {
             client.updateUserAttributes(updateUserAttributesRequest);
+        } catch (SdkException e) {
+            log.error(e.getMessage());
+            throw e;
         } catch (Exception e) {
             log.error(e.getMessage(), e.fillInStackTrace());
-            return 500;
+            throw e;
         }
-        return 204;
     }
 
-    public Integer deleteUser(String username) {
+    public void deleteUser(String username) {
         AdminDeleteUserRequest adminDeleteUserRequest = AdminDeleteUserRequest.builder()
                 .userPoolId("us-east-1_iPhgdkopW").username(username).build();
         try {
             client.adminDeleteUser(adminDeleteUserRequest);
+        } catch (SdkException e) {
+            log.error(e.getMessage());
+            throw e;
         } catch (Exception e) {
             log.error(e.getMessage(), e.fillInStackTrace());
-            return 500;
+            throw e;
         }
-        return 204;
     }
 
     private String calculateSecretHash(String userPoolClientId, String userPoolClientSecret, String userName) {

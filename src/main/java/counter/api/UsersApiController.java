@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import counter.model.User;
 import counter.service.UserService;
 import io.swagger.annotations.ApiParam;
+import software.amazon.awssdk.core.exception.SdkException;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
 @Controller
@@ -47,17 +48,38 @@ public class UsersApiController implements UsersApi {
 
     @Override
     public ResponseEntity<Void> usersPost(@ApiParam(value = "", required = true) @Valid @RequestBody User body) {
-        return new ResponseEntity<Void>(HttpStatus.valueOf(userService.saveUser(body)));
+        try {
+            userService.saveUser(body);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        } catch (SdkException e) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<Void> usersUserIdPut(@ApiParam(value = "", required = true) @Valid @RequestBody User body,
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
-        return new ResponseEntity<Void>(HttpStatus.valueOf(userService.updateUser(username, body)));
+        try {
+            userService.updateUser(username, body);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        } catch (SdkException e) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<Void> usersUserIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
-        return new ResponseEntity<Void>(HttpStatus.valueOf(userService.deleteUser(username)));
+        try {
+            userService.deleteUser(username);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        } catch (SdkException e) {
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

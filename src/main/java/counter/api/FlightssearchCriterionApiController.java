@@ -52,19 +52,28 @@ public class FlightssearchCriterionApiController implements FlightssearchCriteri
             @ApiParam(value = "", required = true) @PathVariable("searchCriterion") String searchCriterion) {
         try {
             Integer i = Integer.valueOf(searchCriterion);
-            return new ResponseEntity<List<Flight>>(flightService.getFlightsByCriterion(i), HttpStatus.OK);
+            List<Flight> result = flightService.getFlightsByCriterion(i);
+            if (result.isEmpty())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<Flight>>(result, HttpStatus.OK);
         } catch (NumberFormatException nfe) {
             // Continue to other types
         }
         try {
             BigDecimal bd = new BigDecimal(searchCriterion);
-            return new ResponseEntity<List<Flight>>(flightService.getFlightsByCriterion(bd), HttpStatus.OK);
+            List<Flight> result = flightService.getFlightsByCriterion(bd);
+            if (result.isEmpty())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<Flight>>(result, HttpStatus.OK);
         } catch (NumberFormatException nfe) {
             // Continue to other types
         }
         try {
             OffsetDateTime odt = OffsetDateTime.parse(searchCriterion);
-            return new ResponseEntity<List<Flight>>(flightService.getFlightsByCriterion(odt), HttpStatus.OK);
+            List<Flight> result = flightService.getFlightsByCriterion(odt);
+            if (result.isEmpty())
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<Flight>>(result, HttpStatus.OK);
         } catch (DateTimeParseException dtpe) {
             // Continue to other types
         }
