@@ -109,7 +109,7 @@ public class UserService {
         }
     }
 
-    private String calculateSecretHash(String userPoolClientId, String userPoolClientSecret, String userName) {
+    public String calculateSecretHash(String userPoolClientId, String userPoolClientSecret, String userName) {
         final String HMAC_SHA256_ALGORITHM = "HmacSHA256";
 
         SecretKeySpec signingKey = new SecretKeySpec(userPoolClientSecret.getBytes(StandardCharsets.UTF_8),

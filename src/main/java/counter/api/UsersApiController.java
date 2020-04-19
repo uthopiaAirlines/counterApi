@@ -61,7 +61,7 @@ public class UsersApiController implements UsersApi {
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         try {
             userService.updateUser(username, body);
-            return new ResponseEntity<Void>(HttpStatus.CREATED);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch (SdkException e) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class UsersApiController implements UsersApi {
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         try {
             userService.deleteUser(username);
-            return new ResponseEntity<Void>(HttpStatus.CREATED);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch (SdkException e) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
