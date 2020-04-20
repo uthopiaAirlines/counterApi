@@ -36,16 +36,6 @@ public class FlightssearchCriterionApiController implements FlightssearchCriteri
         this.request = request;
     }
 
-    // @Override
-    // public Optional<ObjectMapper> getObjectMapper() {
-    //     return Optional.ofNullable(objectMapper);
-    // }
-
-    // @Override
-    // public Optional<HttpServletRequest> getRequest() {
-    //     return Optional.ofNullable(request);
-    // }
-
     @Override
     public ResponseEntity<List<Flight>> flightssearchCriterionGet(
             @ApiParam(value = "", required = true) @PathVariable("searchCriterion") String searchCriterion) {

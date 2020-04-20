@@ -34,16 +34,6 @@ public class BookingsApiController implements BookingsApi {
         this.request = request;
     }
 
-    // @Override
-    // public Optional<ObjectMapper> getObjectMapper() {
-    //     return Optional.ofNullable(objectMapper);
-    // }
-
-    // @Override
-    // public Optional<HttpServletRequest> getRequest() {
-    //     return Optional.ofNullable(request);
-    // }
-
     @Override
     public ResponseEntity<Void> bookingsBookingIdDelete(@ApiParam(value = "",required=true) @PathVariable("bookingId") Integer bookingId) {
         Integer result = bookingService.deleteBooking(bookingId);
@@ -58,10 +48,6 @@ public class BookingsApiController implements BookingsApi {
         } catch (IllegalArgumentException ire) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } 
-        // catch (Exception e) {
-        //     log.error(e.getMessage(), e.getClass());
-        //     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        // }
     }
 
     @Override

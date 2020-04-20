@@ -30,16 +30,6 @@ public class FlightsApiController implements FlightsApi {
         this.request = request;
     }
 
-    // @Override
-    // public Optional<ObjectMapper> getObjectMapper() {
-    //     return Optional.ofNullable(objectMapper);
-    // }
-
-    // @Override
-    // public Optional<HttpServletRequest> getRequest() {
-    //     return Optional.ofNullable(request);
-    // }
-
     @Override
     public ResponseEntity<List<Flight>> flightsGet() {
         List<Flight> result = flightService.getFlights();

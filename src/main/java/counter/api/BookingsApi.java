@@ -31,18 +31,6 @@ public interface BookingsApi {
 
     Logger log = LoggerFactory.getLogger(BookingsApi.class);
 
-    // default Optional<ObjectMapper> getObjectMapper() {
-    //     return Optional.empty();
-    // }
-
-    // default Optional<HttpServletRequest> getRequest() {
-    //     return Optional.empty();
-    // }
-
-    // default Optional<String> getAcceptHeader() {
-    //     return getRequest().map(r -> r.getHeader("Accept"));
-    // }
-
     @ApiOperation(value = "Delete a booking", nickname = "bookingsBookingIdDelete", notes = "", tags = { "Booking", })
     @ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully deleted Booking"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class),
@@ -50,11 +38,6 @@ public interface BookingsApi {
     @RequestMapping(value = "/bookings/{bookingId}", produces = { "text/plain" }, method = RequestMethod.DELETE)
     default ResponseEntity<Void> bookingsBookingIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("bookingId") Integer bookingId) {
-        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        // } else {
-        //     log.warn(
-        //             "ObjectMapper or HttpServletRequest not configured in default BookingsApi interface so no example is generated");
-        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -64,11 +47,6 @@ public interface BookingsApi {
     @RequestMapping(value = "/bookings", produces = { "text/plain" }, consumes = {
             "application/json" }, method = RequestMethod.POST)
     default ResponseEntity<Void> bookingsPost(@ApiParam(value = "", required = true) @Valid @RequestBody Booking body) {
-        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        // } else {
-        //     log.warn(
-        //             "ObjectMapper or HttpServletRequest not configured in default BookingsApi interface so no example is generated");
-        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -79,21 +57,6 @@ public interface BookingsApi {
     @RequestMapping(value = "/bookings/{patron}", produces = { "application/json" }, method = RequestMethod.GET)
     default ResponseEntity<List<Booking>> usersUserIdBookingsGet(
             @ApiParam(value = "User to find bookings by", required = true) @PathVariable("patron") String patron) {
-        // if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        //     if (getAcceptHeader().get().contains("application/json")) {
-        //         try {
-        //             return new ResponseEntity<>(getObjectMapper().get().readValue(
-        //                     "[ {\n  \"bookingAgent\" : 6,\n  \"flight\" : 5,\n  \"patron\" : 1,\n  \"ticketPrice\" : 5.637376656633329,\n  \"numberOfTickets\" : 2,\n  \"bookingId\" : 0\n}, {\n  \"bookingAgent\" : 6,\n  \"flight\" : 5,\n  \"patron\" : 1,\n  \"ticketPrice\" : 5.637376656633329,\n  \"numberOfTickets\" : 2,\n  \"bookingId\" : 0\n} ]",
-        //                     List.class), HttpStatus.NOT_IMPLEMENTED);
-        //         } catch (IOException e) {
-        //             log.error("Couldn't serialize response for content type application/json", e);
-        //             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        //         }
-        //     }
-        // } else {
-        //     log.warn(
-        //             "ObjectMapper or HttpServletRequest not configured in default UsersApi interface so no example is generated");
-        // }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
