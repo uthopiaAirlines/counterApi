@@ -140,6 +140,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- OAUTH -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+
         <!-- AWS -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>

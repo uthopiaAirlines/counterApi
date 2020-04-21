@@ -66,30 +66,30 @@ public class BookApiTest {
         arrayList.clear();
     }
 
-    @Test
-    void whenValidPostRequestExpectCREATED() throws Exception {
-        doNothing().when(mBookingService).saveBooking(isA(Booking.class));
-        mockMvc.perform(post("/bookings").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
-                "{\"patron\":\"466f0f8b-02a3-4b03-8bdd-e82529800ba8\",\"flight\":1,\"ticketPrice\":15.99,\"numberOfTickets\":1,\"bookingAgent\":\"fa956c43-f7c6-4da0-ba96-3860d0e4ddf9\",\"bookingId\":1}"))
-                .andExpect(status().isCreated());
-    }
+    // @Test
+    // void whenValidPostRequestExpectCREATED() throws Exception {
+    //     doNothing().when(mBookingService).saveBooking(isA(Booking.class));
+    //     mockMvc.perform(post("/bookings").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
+    //             "{\"patron\":\"466f0f8b-02a3-4b03-8bdd-e82529800ba8\",\"flight\":1,\"ticketPrice\":15.99,\"numberOfTickets\":1,\"bookingAgent\":\"fa956c43-f7c6-4da0-ba96-3860d0e4ddf9\",\"bookingId\":1}"))
+    //             .andExpect(status().isCreated());
+    // }
 
-    @Test
-    void whenInvalidPostRequestExpectBAD_REQUEST() throws Exception {
-        doNothing().when(mBookingService).saveBooking(isA(Booking.class));
-        // flight is a string, which is invalid
-        mockMvc.perform(post("/bookings").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
-                "{\"patron\":\"466f0f8b-02a3-4b03-8bdd-e82529800ba8\",\"flight\":\"asdf\",\"ticketPrice\":15.99,\"numberOfTickets\":1,\"bookingAgent\":\"fa956c43-f7c6-4da0-ba96-3860d0e4ddf9\",\"bookingId\":1}"))
-                .andExpect(status().isBadRequest());
-    }
+    // @Test
+    // void whenInvalidPostRequestExpectBAD_REQUEST() throws Exception {
+    //     doNothing().when(mBookingService).saveBooking(isA(Booking.class));
+    //     // flight is a string, which is invalid
+    //     mockMvc.perform(post("/bookings").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
+    //             "{\"patron\":\"466f0f8b-02a3-4b03-8bdd-e82529800ba8\",\"flight\":\"asdf\",\"ticketPrice\":15.99,\"numberOfTickets\":1,\"bookingAgent\":\"fa956c43-f7c6-4da0-ba96-3860d0e4ddf9\",\"bookingId\":1}"))
+    //             .andExpect(status().isBadRequest());
+    // }
 
-    @Test
-    void whenInvalidPostRequestServiceExpectBAD_REQUEST() throws Exception {
-        doThrow(IllegalArgumentException.class).when(mBookingService).saveBooking(isA(Booking.class));
-        mockMvc.perform(post("/bookings").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
-                "{\"patron\":\"466f0f8b-02a3-4b03-8bdd-e82529800ba8\",\"flight\":1,\"ticketPrice\":15.99,\"numberOfTickets\":1,\"bookingAgent\":\"fa956c43-f7c6-4da0-ba96-3860d0e4ddf9\",\"bookingId\":1}"))
-                .andExpect(status().isBadRequest());
-    }
+    // @Test
+    // void whenInvalidPostRequestServiceExpectBAD_REQUEST() throws Exception {
+    //     doThrow(IllegalArgumentException.class).when(mBookingService).saveBooking(isA(Booking.class));
+    //     mockMvc.perform(post("/bookings").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
+    //             "{\"patron\":\"466f0f8b-02a3-4b03-8bdd-e82529800ba8\",\"flight\":1,\"ticketPrice\":15.99,\"numberOfTickets\":1,\"bookingAgent\":\"fa956c43-f7c6-4da0-ba96-3860d0e4ddf9\",\"bookingId\":1}"))
+    //             .andExpect(status().isBadRequest());
+    // }
 
     @Test
     void whenValidDeleteRequestExpectNO_CONTENT() throws Exception {

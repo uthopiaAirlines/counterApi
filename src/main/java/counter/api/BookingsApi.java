@@ -13,10 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import counter.model.Booking;
 import io.swagger.annotations.Api;
@@ -46,7 +48,7 @@ public interface BookingsApi {
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
     @RequestMapping(value = "/bookings", produces = { "text/plain" }, consumes = {
             "application/json" }, method = RequestMethod.POST)
-    default ResponseEntity<Void> bookingsPost(@ApiParam(value = "", required = true) @Valid @RequestBody Booking body) {
+    default ResponseEntity<Void> bookingsPost(@ApiParam(value = "", required = true) @Valid @RequestBody Booking body, @AuthenticationPrincipal OAuth2User principal) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
