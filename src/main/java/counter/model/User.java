@@ -1,18 +1,22 @@
 package counter.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import org.springframework.validation.annotation.Validated;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * User
@@ -67,6 +71,10 @@ import javax.xml.bind.annotation.*;
   @JsonProperty("name")
   @JacksonXmlProperty(localName = "name")
   private String name = null;
+  
+  @JsonProperty("username")
+  @JacksonXmlProperty(localName = "username")
+  private String username = null;
 
   @JsonProperty("address")
   @JacksonXmlProperty(localName = "address")
@@ -94,7 +102,6 @@ import javax.xml.bind.annotation.*;
    * @return userId
   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
 
     public Integer getUserId() {
     return userId;
@@ -114,7 +121,6 @@ import javax.xml.bind.annotation.*;
    * @return userRole
   **/
   @ApiModelProperty(required = true, value = "")
-      @NotNull
 
     public UserRoleEnum getUserRole() {
     return userRole;
@@ -142,6 +148,26 @@ import javax.xml.bind.annotation.*;
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public User username(String username) {
+    this.username = username;
+    return this;
+  }
+
+  /**
+   * Get username
+   * @return username
+  **/
+  @ApiModelProperty(required = true, value = "")
+      @NotNull
+
+    public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public User address(String address) {
