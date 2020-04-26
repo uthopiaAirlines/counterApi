@@ -13,15 +13,20 @@ public class SecurityConfig
       throws Exception {
   
 
-        http.authorizeRequests()
-            .antMatchers("/flights**")
+        http
+            .cors()
+            .and()
+            .authorizeRequests()
+            .antMatchers("/v2/counter/flights**")
             .permitAll()
             .anyRequest()
             .authenticated()
             .and()
-            .oauth2Login()
-            .and()
-            .csrf()
-            .disable();
+            .oauth2ResourceServer()
+            .jwt();
+            // .oauth2Login()
+            // .and()
+            // .csrf()
+            // .disable();
     }
 }

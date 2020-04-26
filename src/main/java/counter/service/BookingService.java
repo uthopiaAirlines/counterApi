@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import counter.model.Booking;
@@ -20,9 +20,11 @@ public class BookingService {
     @Autowired
     BookingRepo bookingRepository;
 
-    public void saveBooking(Booking booking, OAuth2User principal) {
-        booking.setBookingAgent(principal.getAttributes().get("sub").toString());
+    public void saveBooking(Booking booking, Jwt principal) {
+        System.out.println(booking + " : " + principal);
+        booking.setBookingAgent(principal.getSubject());
         bookingRepository.save(booking);
+        //@AuthenticationPrincipal OAuth2User
     }
 
     public Integer deleteBooking(Integer bookingId) {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,6 +19,7 @@ import io.swagger.annotations.ApiParam;
 import software.amazon.awssdk.core.exception.SdkException;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
+@CrossOrigin
 @Controller
 public class UsersApiController implements UsersApi {
 
@@ -35,6 +37,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
+    @CrossOrigin
     public ResponseEntity<Void> usersPost(@ApiParam(value = "", required = true) @Valid @RequestBody User body) {
         try {
             userService.saveUser(body);
@@ -47,6 +50,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
+    @CrossOrigin
     public ResponseEntity<Void> usersUserIdPut(@ApiParam(value = "", required = true) @Valid @RequestBody User body,
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         try {
@@ -59,6 +63,8 @@ public class UsersApiController implements UsersApi {
         }
     }
 
+    @Override
+    @CrossOrigin
     public ResponseEntity<Void> usersUserIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         try {
