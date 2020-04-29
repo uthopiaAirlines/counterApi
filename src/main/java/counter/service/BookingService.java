@@ -21,10 +21,9 @@ public class BookingService {
     BookingRepo bookingRepository;
 
     public void saveBooking(Booking booking, Jwt principal) {
-        System.out.println(booking + " : " + principal);
+        System.out.println(booking + " : " + principal.getClaims());
         booking.setBookingAgent(principal.getSubject());
-        bookingRepository.save(booking);
-        //@AuthenticationPrincipal OAuth2User
+        //bookingRepository.save(booking);
     }
 
     public Integer deleteBooking(Integer bookingId) {
