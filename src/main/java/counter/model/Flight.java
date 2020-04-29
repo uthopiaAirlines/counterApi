@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -64,8 +66,9 @@ public class Flight implements Serializable {
 
   @JsonProperty("arrivalLocation")
   @JacksonXmlProperty(localName = "arrivalLocation")
-  @Column(name = "arrivalLocation", nullable = false)
-  private Integer arrivalLocation = null;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "arrivalLocation", nullable = false, updatable = false, referencedColumnName = "airportId")
+  private Airport arrivalLocation = null;
 
   @JsonProperty("departureTime")
   @JacksonXmlProperty(localName = "departureTime")
@@ -74,8 +77,9 @@ public class Flight implements Serializable {
 
   @JsonProperty("departureLocation")
   @JacksonXmlProperty(localName = "departureLocation")
-  @Column(name = "departureLocation", nullable = false)
-  private Integer departureLocation = null;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "departureLocation", nullable = false, updatable = false, referencedColumnName = "airportId")
+  private Airport departureLocation = null;
 
   @JsonProperty("availableSeats")
   @JacksonXmlProperty(localName = "availableSeats")
@@ -151,7 +155,7 @@ public class Flight implements Serializable {
     this.arrivalTime = arrivalTime;
   }
 
-  public Flight arrivalLocation(final Integer arrivalLocation) {
+  public Flight arrivalLocation(final Airport arrivalLocation) {
     this.arrivalLocation = arrivalLocation;
     return this;
   }
@@ -164,11 +168,11 @@ public class Flight implements Serializable {
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-  public Integer getArrivalLocation() {
+  public Airport getArrivalLocation() {
     return arrivalLocation;
   }
 
-  public void setArrivalLocation(final Integer arrivalLocation) {
+  public void setArrivalLocation(final Airport arrivalLocation) {
     this.arrivalLocation = arrivalLocation;
   }
 
@@ -194,7 +198,7 @@ public class Flight implements Serializable {
     this.departureTime = departureTime;
   }
 
-  public Flight departureLocation(final Integer departureLocation) {
+  public Flight departureLocation(final Airport departureLocation) {
     this.departureLocation = departureLocation;
     return this;
   }
@@ -207,11 +211,11 @@ public class Flight implements Serializable {
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-  public Integer getDepartureLocation() {
+  public Airport getDepartureLocation() {
     return departureLocation;
   }
 
-  public void setDepartureLocation(final Integer departureLocation) {
+  public void setDepartureLocation(final Airport departureLocation) {
     this.departureLocation = departureLocation;
   }
 

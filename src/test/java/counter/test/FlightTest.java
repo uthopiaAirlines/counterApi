@@ -22,10 +22,10 @@ public class FlightTest {
     @BeforeEach
     void setFlight() {
         flight.setAirline(1);
-        flight.setArrivalLocation(1);
+        // flight.setArrivalLocation(1);
         flight.setArrivalTime(OffsetDateTime.now());
         flight.setAvailableSeats(1);
-        flight.setDepartureLocation(1);
+        // flight.setDepartureLocation(1);
         flight.setDepartureTime(OffsetDateTime.now().minusDays(3));
         flight.setFlightId(1);
         flight.setPrice(BigDecimal.valueOf(15.99));
@@ -37,11 +37,11 @@ public class FlightTest {
         assertEquals(Integer.valueOf(2), flight1.getAirline());
     }
 
-    @Test
-    public void arrivalLocationTest() {
-        Flight flight1 = flight.arrivalLocation(2);
-        assertEquals(Integer.valueOf(2), flight1.getArrivalLocation());
-    }
+    // @Test
+    // public void arrivalLocationTest() {
+    //     Flight flight1 = flight.arrivalLocation(2);
+    //     assertEquals(Integer.valueOf(2), flight1.getArrivalLocation());
+    // }
 
     @Test
     public void arrivalTimeTest() {
@@ -56,11 +56,11 @@ public class FlightTest {
         assertEquals(Integer.valueOf(2), flight1.getAvailableSeats());
     }
 
-    @Test
-    public void departureLocationTest() {
-        Flight flight1 = flight.departureLocation(2);
-        assertEquals(Integer.valueOf(2), flight1.getDepartureLocation());
-    }
+    // @Test
+    // public void departureLocationTest() {
+    //     Flight flight1 = flight.departureLocation(2);
+    //     assertEquals(Integer.valueOf(2), flight1.getDepartureLocation());
+    // }
 
     @Test
     public void departureTimeTest() {
@@ -93,18 +93,18 @@ public class FlightTest {
         Flight flight1 = new Flight();
         OffsetDateTime now = OffsetDateTime.now();
         flight.setAirline(1);
-        flight.setArrivalLocation(1);
+        // flight.setArrivalLocation(1);
         flight.setArrivalTime(now);
         flight.setAvailableSeats(1);
-        flight.setDepartureLocation(1);
+        // flight.setDepartureLocation(1);
         flight.setDepartureTime(now.minusDays(3));
         flight.setFlightId(1);
         flight.setPrice(BigDecimal.valueOf(15.99));
         flight1.setAirline(1);
-        flight1.setArrivalLocation(1);
+        // flight1.setArrivalLocation(1);
         flight1.setArrivalTime(now);
         flight1.setAvailableSeats(1);
-        flight1.setDepartureLocation(1);
+        // flight1.setDepartureLocation(1);
         flight1.setDepartureTime(now.minusDays(3));
         flight1.setFlightId(1);
         flight1.setPrice(BigDecimal.valueOf(15.99));
