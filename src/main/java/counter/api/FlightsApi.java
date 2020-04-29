@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,17 +22,19 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
+@CrossOrigin
 @Api(value = "flights", description = "the flights API")
 public interface FlightsApi {
 
     Logger log = LoggerFactory.getLogger(FlightsApi.class);
 
+    @CrossOrigin
     @ApiOperation(value = "Get all flights", nickname = "flightsGet", notes = "", response = Flight.class, responseContainer = "List", tags = {
             "Flight", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully got the list of flights", response = Flight.class, responseContainer = "List"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
-    @RequestMapping(value = "/flights", produces = { "application/json", "text/plain" }, method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/counter/flights", produces = { "application/json", "text/plain" }, method = RequestMethod.GET)
     default ResponseEntity<List<Flight>> flightsGet() {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }

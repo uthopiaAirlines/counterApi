@@ -11,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,6 +21,7 @@ import counter.model.Booking;
 import counter.service.BookingService;
 import io.swagger.annotations.ApiParam;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
+@CrossOrigin
 @Controller
 public class BookingsApiController implements BookingsApi {
 
@@ -36,14 +38,16 @@ public class BookingsApiController implements BookingsApi {
         this.request = request;
     }
 
+    @CrossOrigin
     @Override
     public ResponseEntity<Void> bookingsBookingIdDelete(@ApiParam(value = "",required=true) @PathVariable("bookingId") Integer bookingId) {
         Integer result = bookingService.deleteBooking(bookingId);
         return new ResponseEntity<Void>(HttpStatus.valueOf(result));
     }
 
+    @CrossOrigin
     @Override
-    public ResponseEntity<Void> bookingsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Booking body, @AuthenticationPrincipal OAuth2User principal) {
+    public ResponseEntity<Void> bookingsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Booking body, @AuthenticationPrincipal Jwt principal) {
         try {
             bookingService.saveBooking(body, principal);
             return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -52,6 +56,7 @@ public class BookingsApiController implements BookingsApi {
         } 
     }
 
+    @CrossOrigin
     @Override
     public ResponseEntity<List<Booking>> usersUserIdBookingsGet(@ApiParam(value = "User to find bookings by",required=true) @PathVariable("patron") String patron) {
         List<Booking> bookings = bookingService.getBookingsByPatron(patron);

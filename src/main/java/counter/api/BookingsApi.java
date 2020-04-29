@@ -14,11 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 import counter.model.Booking;
 import io.swagger.annotations.Api;
@@ -28,35 +29,39 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
+@CrossOrigin
 @Api(value = "bookings", description = "the bookings API")
 public interface BookingsApi {
 
     Logger log = LoggerFactory.getLogger(BookingsApi.class);
 
+    @CrossOrigin
     @ApiOperation(value = "Delete a booking", nickname = "bookingsBookingIdDelete", notes = "", tags = { "Booking", })
     @ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully deleted Booking"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class),
             @ApiResponse(code = 404, message = "Booking not found") })
-    @RequestMapping(value = "/bookings/{bookingId}", produces = { "text/plain" }, method = RequestMethod.DELETE)
+    @RequestMapping(value = "/v2/counter/bookings/{bookingId}", produces = { "text/plain" }, method = RequestMethod.DELETE)
     default ResponseEntity<Void> bookingsBookingIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("bookingId") Integer bookingId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    @CrossOrigin
     @ApiOperation(value = "Create a booking", nickname = "bookingsPost", notes = "", tags = { "Booking", })
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created new Booking"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
-    @RequestMapping(value = "/bookings", produces = { "text/plain" }, consumes = {
+    @RequestMapping(value = "/v2/counter/bookings", produces = { "text/plain" }, consumes = {
             "application/json" }, method = RequestMethod.POST)
-    default ResponseEntity<Void> bookingsPost(@ApiParam(value = "", required = true) @Valid @RequestBody Booking body, @AuthenticationPrincipal OAuth2User principal) {
+    default ResponseEntity<Void> bookingsPost(@ApiParam(value = "", required = true) @Valid @RequestBody Booking body, @AuthenticationPrincipal Jwt principal) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    @CrossOrigin
     @ApiOperation(value = "Get all bookings by user", nickname = "usersUserIdBookingsGet", notes = "", response = Booking.class, responseContainer = "List", tags = {
             "Booking", "Users", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully returned a list of artists", response = Booking.class, responseContainer = "List") })
-    @RequestMapping(value = "/bookings/{patron}", produces = { "application/json" }, method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/counter/bookings/{patron}", produces = { "application/json" }, method = RequestMethod.GET)
     default ResponseEntity<List<Booking>> usersUserIdBookingsGet(
             @ApiParam(value = "User to find bookings by", required = true) @PathVariable("patron") String patron) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
