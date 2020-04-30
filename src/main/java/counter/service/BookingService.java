@@ -23,7 +23,7 @@ public class BookingService {
     public void saveBooking(Booking booking, Jwt principal) {
         System.out.println(booking + " : " + principal.getClaims());
         booking.setBookingAgent(principal.getSubject());
-        //bookingRepository.save(booking);
+        bookingRepository.save(booking);
     }
 
     public Integer deleteBooking(Integer bookingId) {
