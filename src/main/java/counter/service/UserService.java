@@ -1,8 +1,10 @@
 package counter.service;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.crypto.Mac;
@@ -12,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import counter.model.AwsUser;
 import counter.model.User;
 import software.amazon.awssdk.core.exception.SdkException;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
@@ -23,6 +26,9 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeTy
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpResponse;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.UpdateUserAttributesRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.UserType;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUsersInGroupRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.ListUsersInGroupRequest.Builder;
 
 @Service
 public class UserService {
@@ -123,5 +129,15 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException("Error while calculating ");
         }
+    }
+    
+    public List<AwsUser> getAllUsers(){
+    	Builder requestBuilder = ListUsersInGroupRequest.builder();
+    	ListUsersInGroupRequest group = requestBuilder.groupName("Customer").userPoolId("us-east-1_iPhgdkopW").build();
+    	List<AwsUser> clients = new ArrayList<AwsUser>();
+    	client.listUsersInGroup(group).users().forEach(user ->{
+    		clients.add(new AwsUser(user));
+    	});;
+    	return clients;
     }
 }
