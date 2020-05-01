@@ -27,6 +27,8 @@ public class BookingService {
     }
 
     public Integer deleteBooking(Integer bookingId) {
+        // TODO 
+        // add refund stuff here
         if (bookingRepository.existsById(bookingId)) {
             bookingRepository.deleteById(bookingId);
             return HttpStatusCode.NO_CONTENT;
