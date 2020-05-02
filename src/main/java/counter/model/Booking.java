@@ -110,6 +110,10 @@ public class Booking implements Serializable {
     this.paymentId = paymentId;
   }
 
+  public String getPaymentId() {
+    return this.paymentId;
+  }
+
   public Booking paymentId(String paymentId) {
     this.paymentId = paymentId;
     return this;
