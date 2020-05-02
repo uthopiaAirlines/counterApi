@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -33,6 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
 @JacksonXmlRootElement(localName = "Booking")
 @XmlRootElement(name = "Booking")
+@JsonIgnoreProperties(value = {"paymentId"}, allowSetters = true)
 @Entity
 @Table(name = "bookings")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -44,6 +47,10 @@ public class Booking implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer bookingId = null;
+
+  @JsonProperty("paymentId")
+  @JacksonXmlProperty(localName = "paymentId")
+  private String paymentId = null;
 
   @JsonProperty("bookingAgent")
   @JacksonXmlProperty(localName = "bookingAgent")
@@ -93,6 +100,22 @@ public class Booking implements Serializable {
 
   public Booking bookingAgent(String bookingAgent) {
     this.bookingAgent = bookingAgent;
+    return this;
+  }
+
+  /**
+   * @param paymentId the paymentId to set
+   */
+  public void setPaymentId(String paymentId) {
+    this.paymentId = paymentId;
+  }
+
+  public String getPaymentId() {
+    return this.paymentId;
+  }
+
+  public Booking paymentId(String paymentId) {
+    this.paymentId = paymentId;
     return this;
   }
 

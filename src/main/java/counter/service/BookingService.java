@@ -5,6 +5,10 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.stripe.Stripe;
+import com.stripe.model.Refund;
+import com.stripe.param.RefundCreateParams;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,14 @@ public class BookingService {
 
     public Integer deleteBooking(Integer bookingId) {
         if (bookingRepository.existsById(bookingId)) {
+            Stripe.apiKey = "sk_test_nO7vO3qiJLXNPAbw4sO10zx700DuBv1ev6";
+            try {
+                Refund.create(RefundCreateParams.builder()
+                    .setPaymentIntent(getBookingByBookingId(bookingId).getPaymentId())
+                    .build());
+            } catch (Exception e) {
+                return HttpStatusCode.SERVICE_UNAVAILABLE;
+            }
             bookingRepository.deleteById(bookingId);
             return HttpStatusCode.NO_CONTENT;
         }
