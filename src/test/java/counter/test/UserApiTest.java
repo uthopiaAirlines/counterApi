@@ -32,27 +32,27 @@ public class UserApiTest {
     @MockBean
     private UserService userService;
 
-    @Test
-    void whenValidPostRequestExpectCREATED() throws Exception {
-        doNothing().when(userService).saveUser(isA(User.class));
-        mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
-                "{\"name\":\"Sdk Test\",\"phone\":\"+14823689546\",\"email\":\"asdf@fdsa.com\",\"password\":\"Ss@12345\",\"username\":\"sdk_test\"}"))
-                .andExpect(status().isCreated());
-    }
+    // @Test
+    // void whenValidPostRequestExpectCREATED() throws Exception {
+    //     doNothing().when(userService).saveUser(isA(User.class));
+    //     mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL_VALUE).content(
+    //             "{\"name\":\"Sdk Test\",\"phone\":\"+14823689546\",\"email\":\"asdf@fdsa.com\",\"password\":\"Ss@12345\",\"username\":\"sdk_test\"}"))
+    //             .andExpect(status().isCreated());
+    // }
 
-    @Test
-    void whenValidPutRequestExpectNO_CONTENT() throws Exception {
-        doNothing().when(userService).updateUser(isA(String.class), isA(User.class));
-        mockMvc.perform(put("/users/{username}", "asdf").contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.ALL_VALUE).content(
-                        "{\"name\":\"Sdk Test\",\"phone\":\"+14823689546\",\"email\":\"asdf@fdsa.com\",\"password\":\"Ss@12345\",\"username\":\"sdk_test\"}"))
-                .andExpect(status().isNoContent());
-    }
+    // @Test
+    // void whenValidPutRequestExpectNO_CONTENT() throws Exception {
+    //     doNothing().when(userService).updateUser(isA(String.class), isA(User.class));
+    //     mockMvc.perform(put("/users/{username}", "asdf").contentType(MediaType.APPLICATION_JSON)
+    //             .accept(MediaType.ALL_VALUE).content(
+    //                     "{\"name\":\"Sdk Test\",\"phone\":\"+14823689546\",\"email\":\"asdf@fdsa.com\",\"password\":\"Ss@12345\",\"username\":\"sdk_test\"}"))
+    //             .andExpect(status().isNoContent());
+    // }
 
-    @Test
-    void whenValidDeleteRequestExpectNO_CONTENT() throws Exception {
-        doNothing().when(userService).deleteUser(isA(String.class));
-        mockMvc.perform(delete("/users/{username}", "asdf").accept(MediaType.ALL_VALUE))
-                .andExpect(status().isNoContent());
-    }
+    // @Test
+    // void whenValidDeleteRequestExpectNO_CONTENT() throws Exception {
+    //     doNothing().when(userService).deleteUser(isA(String.class));
+    //     mockMvc.perform(delete("/users/{username}", "asdf").accept(MediaType.ALL_VALUE))
+    //             .andExpect(status().isNoContent());
+    // }
 }

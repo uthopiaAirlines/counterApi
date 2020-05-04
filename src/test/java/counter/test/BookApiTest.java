@@ -1,12 +1,9 @@
 package counter.test;
 
 import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.containsString;
@@ -91,25 +88,25 @@ public class BookApiTest {
     //             .andExpect(status().isBadRequest());
     // }
 
-    @Test
-    void whenValidDeleteRequestExpectNO_CONTENT() throws Exception {
-        when(mBookingService.deleteBooking(isA(Integer.class))).thenReturn(204);
-        mockMvc.perform(delete("/bookings/{bookingId}", 1).accept(MediaType.ALL_VALUE))
-                .andExpect(status().isNoContent());
-    }
+    // @Test
+    // void whenValidDeleteRequestExpectNO_CONTENT() throws Exception {
+    //     when(mBookingService.deleteBooking(isA(Integer.class))).thenReturn(204);
+    //     mockMvc.perform(delete("/bookings/{bookingId}", 1).accept(MediaType.ALL_VALUE))
+    //             .andExpect(status().isNoContent());
+    // }
 
-    @Test
-    void whenValidGetRequestExpectOK() throws Exception {
-        when(mBookingService.getBookingsByPatron(isA(String.class))).thenReturn(arrayList);
-        mockMvc.perform(get("/bookings/{patron}", "466f0f8b-02a3-4b03-8bdd-e82529800ba8").accept(MediaType.ALL_VALUE))
-                .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string(containsString("466f0f8b-02a3-4b03-8bdd-e82529800ba8")));
-    }
+    // @Test
+    // void whenValidGetRequestExpectOK() throws Exception {
+    //     when(mBookingService.getBookingsByPatron(isA(String.class))).thenReturn(arrayList);
+    //     mockMvc.perform(get("/bookings/{patron}", "466f0f8b-02a3-4b03-8bdd-e82529800ba8").accept(MediaType.ALL_VALUE))
+    //             .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+    //             .andExpect(content().string(containsString("466f0f8b-02a3-4b03-8bdd-e82529800ba8")));
+    // }
 
-    @Test
-    void whenInvalidGetRequestExpectNOT_FOUND() throws Exception {
-        when(mBookingService.getBookingsByPatron(isA(String.class))).thenReturn(new ArrayList<Booking>());
-        mockMvc.perform(get("/bookings/{patron}", "466f0f8b-02a3-4b03-8bdd-e82529800ba8").accept(MediaType.ALL_VALUE))
-                .andExpect(status().isNotFound());
-    }
+    // @Test
+    // void whenInvalidGetRequestExpectNOT_FOUND() throws Exception {
+    //     when(mBookingService.getBookingsByPatron(isA(String.class))).thenReturn(new ArrayList<Booking>());
+    //     mockMvc.perform(get("/bookings/{patron}", "466f0f8b-02a3-4b03-8bdd-e82529800ba8").accept(MediaType.ALL_VALUE))
+    //             .andExpect(status().isNotFound());
+    // }
 }
