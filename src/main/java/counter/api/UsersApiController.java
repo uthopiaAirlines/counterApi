@@ -26,7 +26,7 @@ import software.amazon.awssdk.core.exception.SdkException;
 
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin
+@CrossOrigin("https://www.utopiaairlines.com")
 @Controller
 public class UsersApiController implements UsersApi {
 
@@ -44,7 +44,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
-    @CrossOrigin
+    @CrossOrigin("https://www.utopiaairlines.com")
     public ResponseEntity<Void> usersPost(@ApiParam(value = "", required = true) @Valid @RequestBody User body) {
         try {
             userService.saveUser(body);
@@ -57,7 +57,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
-    @CrossOrigin
+    @CrossOrigin("https://www.utopiaairlines.com")
     public ResponseEntity<Void> usersUserIdPut(@ApiParam(value = "", required = true) @Valid @RequestBody User body,
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         try {
@@ -71,7 +71,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
-    @CrossOrigin
+    @CrossOrigin("https://www.utopiaairlines.com")
     public ResponseEntity<Void> usersUserIdDelete(
             @ApiParam(value = "", required = true) @PathVariable("username") String username) {
         try {
@@ -84,7 +84,7 @@ public class UsersApiController implements UsersApi {
         }
     }
     
-    @CrossOrigin
+    @CrossOrigin("https://www.utopiaairlines.com")
     @RequestMapping(value = "/v2/counter/users", produces = { "application/json" }, method = RequestMethod.GET)
     public ResponseEntity<List<AwsUser>>getUsers(){
     	try {

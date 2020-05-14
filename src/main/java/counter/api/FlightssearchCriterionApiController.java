@@ -21,7 +21,7 @@ import counter.service.FlightService;
 import io.swagger.annotations.ApiParam;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin
+@CrossOrigin("https://www.utopiaairlines.com")
 @Controller
 public class FlightssearchCriterionApiController implements FlightssearchCriterionApi {
 
@@ -39,7 +39,7 @@ public class FlightssearchCriterionApiController implements FlightssearchCriteri
     }
 
     @Override
-    @CrossOrigin
+    @CrossOrigin("https://www.utopiaairlines.com")
     public ResponseEntity<List<Flight>> flightssearchCriterionGet(
             @ApiParam(value = "", required = true) @PathVariable("searchCriterion") String searchCriterion) {
         try {

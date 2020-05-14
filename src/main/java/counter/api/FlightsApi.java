@@ -22,13 +22,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin
+@CrossOrigin("https://www.utopiaairlines.com")
 @Api(value = "flights", description = "the flights API")
 public interface FlightsApi {
 
     Logger log = LoggerFactory.getLogger(FlightsApi.class);
 
-    @CrossOrigin
+    @CrossOrigin("https://www.utopiaairlines.com")
     @ApiOperation(value = "Get all flights", nickname = "flightsGet", notes = "", response = Flight.class, responseContainer = "List", tags = {
             "Flight", })
     @ApiResponses(value = {
