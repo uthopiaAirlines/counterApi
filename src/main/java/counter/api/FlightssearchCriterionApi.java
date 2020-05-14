@@ -24,13 +24,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin("https://utopiaairlines.com")
+@CrossOrigin("https://www.utopiaairlines.com")
 @Api(value = "flights:{searchCriterion}", description = "the flights:{searchCriterion} API")
 public interface FlightssearchCriterionApi {
 
     Logger log = LoggerFactory.getLogger(FlightssearchCriterionApi.class);
 
-    @CrossOrigin("https://utopiaairlines.com")
+    @CrossOrigin("https://www.utopiaairlines.com")
     @ApiOperation(value = "Get all the flights that have the search criterion within them", nickname = "flightssearchCriterionGet", notes = "", response = Flight.class, tags = {
             "Flight", })
     @ApiResponses(value = {
