@@ -25,13 +25,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin
+@CrossOrigin("https://utopiaairlines.com")
 @Api(value = "users", description = "the users API")
 public interface UsersApi {
 
     Logger log = LoggerFactory.getLogger(UsersApi.class);
 
-    @CrossOrigin
+    @CrossOrigin("https://utopiaairlines.com")
     @ApiOperation(value = "Creating a new user", nickname = "usersPost", notes = "", tags = { "Users", })
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully created new User"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
@@ -41,7 +41,7 @@ public interface UsersApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @CrossOrigin
+    @CrossOrigin("https://utopiaairlines.com")
     @ApiOperation(value = "Delete a user", nickname = "usersUserIdDelete", notes = "", tags = { "Users", })
     @ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully deleted User"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class),
@@ -53,7 +53,7 @@ public interface UsersApi {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @CrossOrigin
+    @CrossOrigin("https://utopiaairlines.com")
     @ApiOperation(value = "Update a user", nickname = "usersUserIdPut", notes = "", tags = { "Users", })
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated User"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })

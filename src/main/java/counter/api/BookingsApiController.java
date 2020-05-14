@@ -21,7 +21,7 @@ import counter.model.Booking;
 import counter.service.BookingService;
 import io.swagger.annotations.ApiParam;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin
+@CrossOrigin("https://utopiaairlines.com")
 @Controller
 public class BookingsApiController implements BookingsApi {
 
@@ -38,14 +38,14 @@ public class BookingsApiController implements BookingsApi {
         this.request = request;
     }
 
-    @CrossOrigin
+    @CrossOrigin("https://utopiaairlines.com")
     @Override
     public ResponseEntity<Void> bookingsBookingIdDelete(@ApiParam(value = "",required=true) @PathVariable("bookingId") Integer bookingId) {
         Integer result = bookingService.deleteBooking(bookingId);
         return new ResponseEntity<Void>(HttpStatus.valueOf(result));
     }
 
-    @CrossOrigin
+    @CrossOrigin("https://utopiaairlines.com")
     @Override
     public ResponseEntity<Void> bookingsPost(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Booking body, @AuthenticationPrincipal Jwt principal) {
         try {
@@ -56,7 +56,7 @@ public class BookingsApiController implements BookingsApi {
         } 
     }
 
-    @CrossOrigin
+    @CrossOrigin("https://utopiaairlines.com")
     @Override
     public ResponseEntity<List<Booking>> usersUserIdBookingsGet(@ApiParam(value = "User to find bookings by",required=true) @PathVariable("patron") String patron) {
         List<Booking> bookings = bookingService.getBookingsByPatron(patron);

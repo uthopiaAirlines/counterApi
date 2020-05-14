@@ -28,9 +28,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             return authorities;
           }
         });
-    // .oauth2Login()
-    // .and()
-    // .csrf()
-    // .disable();
   }
 }
