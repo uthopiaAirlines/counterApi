@@ -56,8 +56,9 @@ public class Flight implements Serializable {
 
   @JsonProperty("airline")
   @JacksonXmlProperty(localName = "airline")
-  @Column(name = "airline", nullable = false)
-  private Integer airline = null;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "airline", nullable = false, updatable = false, referencedColumnName = "airlineId")
+  private Airline airline = null;
 
   @JsonProperty("arrivalTime")
   @JacksonXmlProperty(localName = "arrivalTime")
@@ -112,7 +113,7 @@ public class Flight implements Serializable {
     this.flightId = flightId;
   }
 
-  public Flight airline(final Integer airline) {
+  public Flight airline(final Airline airline) {
     this.airline = airline;
     return this;
   }
@@ -125,11 +126,11 @@ public class Flight implements Serializable {
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-  public Integer getAirline() {
+  public Airline getAirline() {
     return airline;
   }
 
-  public void setAirline(final Integer airline) {
+  public void setAirline(final Airline airline) {
     this.airline = airline;
   }
 
