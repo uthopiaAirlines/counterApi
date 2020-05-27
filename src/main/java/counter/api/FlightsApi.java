@@ -5,8 +5,6 @@
  */
 package counter.api;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import counter.model.Flight;
+import counter.model.FlightResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,7 +35,8 @@ public interface FlightsApi {
             @ApiResponse(code = 200, message = "Successfully got the list of flights", response = Flight.class, responseContainer = "List"),
             @ApiResponse(code = 400, message = "Invalid Request", response = String.class) })
     @RequestMapping(value = "/v2/counter/flights", produces = { "application/json", "text/plain" }, method = RequestMethod.GET)
-    default ResponseEntity<List<Flight>> flightsGet() {
+    default ResponseEntity<FlightResp> flightsGet(@RequestParam int pageSize, @RequestParam int currentPage,
+    		@RequestParam String filterString, @RequestParam boolean isAsc, @RequestParam String sortItem) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

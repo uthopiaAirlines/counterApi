@@ -1,14 +1,19 @@
 package counter.service;
 
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import counter.model.Flight;
+import counter.model.FlightResp;
 import counter.repository.FlightRepo;
 
 @Service
@@ -18,8 +23,27 @@ public class FlightService {
     @Autowired
     FlightRepo flightRepository;
 
-    public List<Flight> getFlights() {
-        return flightRepository.findAll();
+    public FlightResp getFlights(int pageSize,int currentPage,String filterString,boolean isAsc,String sortItem) {
+    	FlightResp resp = new FlightResp();
+    	Pageable pageRequest;
+    	if(sortItem.equals("flightId")||sortItem.equals("arrivalTime")||sortItem.equals("departureTime")||sortItem.equals("availableSeats")||
+    				sortItem.equals("price")) {
+	    	if(isAsc == false) 
+	    		pageRequest = PageRequest.of(currentPage, pageSize, Sort.by(sortItem).descending());
+	    	else
+	    		pageRequest = PageRequest.of(currentPage, pageSize, Sort.by(sortItem).ascending());
+    	}
+    	else if(sortItem.equals("airline")||sortItem.equals("arrivalLocation")||sortItem.equals("departureLocation")) {
+    		if(isAsc==false)
+    			pageRequest = PageRequest.of(currentPage, pageSize, Sort.by(sortItem +".name").descending());
+    		else
+    			pageRequest = PageRequest.of(currentPage, pageSize, Sort.by(sortItem +".name"));
+    	}
+    	else
+    		pageRequest = PageRequest.of(currentPage, pageSize);
+    	resp.setTotalFlights(flightRepository.count());
+    	resp.setData(flightRepository.findAll(pageRequest).getContent());
+    	return resp;
     }
 
     public List<Flight> getFlightsByCriterion(Object criterion) {
