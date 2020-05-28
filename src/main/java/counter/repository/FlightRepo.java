@@ -14,6 +14,6 @@ import counter.model.Flight;
 public interface FlightRepo extends PagingAndSortingRepository<Flight, Integer>{
 
     List<Flight> findByFlightIdOrAirlineOrArrivalTimeOrArrivalLocationOrDepartureTimeOrDepartureLocationOrAvailableSeatsOrPrice(Integer flightId, Integer airline, OffsetDateTime arrivalTime, Integer arrivalLocation, OffsetDateTime departureTime, Integer departureLocation, Integer availableSeats, BigDecimal price);
-    List<Flight> findByFlightIdOrAirlineOrArrivalTimeOrArrivalLocationOrDepartureTimeOrDepartureLocationOrAvailableSeatsOrPrice(Integer flightId, Integer airline, OffsetDateTime arrivalTime, Integer arrivalLocation, OffsetDateTime departureTime, Integer departureLocation, Integer availableSeats, BigDecimal price, Pageable page);
-
+    List<Flight> findByAirlineNameContainsIgnoreCaseOrArrivalTimeOrArrivalLocationNameContainsIgnoreCaseOrDepartureTimeOrDepartureLocationNameContainsIgnoreCaseOrAvailableSeatsOrPrice(String airlineName, OffsetDateTime arrivalTime, String arrivalLocationName, OffsetDateTime departureTime, String departureLocationName, Integer availableSeats, BigDecimal price, Pageable page);
+    long countByAirlineNameContainsIgnoreCaseOrArrivalTimeOrArrivalLocationNameContainsIgnoreCaseOrDepartureTimeOrDepartureLocationNameContainsIgnoreCaseOrAvailableSeatsOrPrice(String airlineName, OffsetDateTime arrivalTime, String arrivalLocationName, OffsetDateTime departureTime, String departureLocationName, Integer availableSeats, BigDecimal price);
 }
