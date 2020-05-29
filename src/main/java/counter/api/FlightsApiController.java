@@ -40,7 +40,7 @@ public class FlightsApiController implements FlightsApi {
     		return new ResponseEntity<FlightResp>(HttpStatus.BAD_REQUEST);
         FlightResp result = flightService.getFlights(pageSize, currentPage, filterString, isAsc, sortItem);
         if (result.getData().isEmpty())
-            return new ResponseEntity<FlightResp>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<FlightResp>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<FlightResp>(result, HttpStatus.OK);
     }
 
