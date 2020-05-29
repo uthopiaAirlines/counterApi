@@ -1,8 +1,8 @@
 package counter.service;
 
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +42,81 @@ public class FlightService {
     	else
     		pageRequest = PageRequest.of(currentPage, pageSize);
     	resp.setTotalFlights(flightRepository.count());
-    	resp.setData(flightRepository.findAll(pageRequest).getContent());
+    	if(filterString.isEmpty()) {
+    		resp.setData(flightRepository.findAll(pageRequest).getContent());
+    		resp.setTotalFiltered(resp.getTotalFlights());
+    	}
+    	else {
+    		resp.setData(searchPageableByCriterion(filterString, pageRequest));
+    		resp.setTotalFiltered(countOfPageableByCriterion(filterString, pageRequest));
+    	}
     	return resp;
+    }
+    
+    private List<Flight> searchPageableByCriterion(String filterString, Pageable pageRequest){
+    	Integer flightId, availableSeats;
+        OffsetDateTime arrivalTime, departureTime;
+        BigDecimal price;
+        try {
+        	Integer criterion = Integer.valueOf(filterString);
+            flightId = criterion;
+            availableSeats =  criterion;
+        }
+        catch(NumberFormatException nfe) {
+            flightId = Integer.valueOf(-1);
+            availableSeats = Integer.valueOf(-1);
+        }
+        try {
+        	OffsetDateTime criterion = OffsetDateTime.parse(filterString);
+            arrivalTime = (OffsetDateTime) criterion;
+            departureTime = (OffsetDateTime) criterion;
+        }
+        catch(DateTimeParseException dtpe) {
+            arrivalTime = OffsetDateTime.now().minusYears(40);
+            departureTime = OffsetDateTime.now().minusYears(40);
+        }
+        try {
+        	BigDecimal criterion = new BigDecimal(filterString);
+            price = (BigDecimal) criterion;
+        }
+        catch(NumberFormatException nfe) {
+            price = new BigDecimal(-1);
+        }
+		return flightRepository.findByAirlineNameContainsIgnoreCaseOrArrivalTimeOrArrivalLocationNameContainsIgnoreCaseOrDepartureTimeOrDepartureLocationNameContainsIgnoreCaseOrAvailableSeatsOrPrice( 
+				filterString, arrivalTime, filterString, departureTime, filterString, availableSeats, price, pageRequest);
+    }
+    
+    private long countOfPageableByCriterion(String filterString, Pageable pageRequest){
+    	Integer flightId, availableSeats;
+        OffsetDateTime arrivalTime, departureTime;
+        BigDecimal price;
+        try {
+        	Integer criterion = Integer.valueOf(filterString);
+            flightId = criterion;
+            availableSeats =  criterion;
+        }
+        catch(NumberFormatException nfe) {
+            flightId = Integer.valueOf(-1);
+            availableSeats = Integer.valueOf(-1);
+        }
+        try {
+        	OffsetDateTime criterion = OffsetDateTime.parse(filterString);
+            arrivalTime = (OffsetDateTime) criterion;
+            departureTime = (OffsetDateTime) criterion;
+        }
+        catch(DateTimeParseException dtpe) {
+            arrivalTime = OffsetDateTime.now().minusYears(40);
+            departureTime = OffsetDateTime.now().minusYears(40);
+        }
+        try {
+        	BigDecimal criterion = new BigDecimal(filterString);
+            price = (BigDecimal) criterion;
+        }
+        catch(NumberFormatException nfe) {
+            price = new BigDecimal(-1);
+        }
+		return flightRepository.countByAirlineNameContainsIgnoreCaseOrArrivalTimeOrArrivalLocationNameContainsIgnoreCaseOrDepartureTimeOrDepartureLocationNameContainsIgnoreCaseOrAvailableSeatsOrPrice( 
+				filterString, arrivalTime, filterString, departureTime, filterString, availableSeats, price);
     }
 
     public List<Flight> getFlightsByCriterion(Object criterion) {
