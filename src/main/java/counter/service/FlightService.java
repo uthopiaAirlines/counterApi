@@ -41,9 +41,7 @@ public class FlightService {
     	}
     	else
     		pageRequest = PageRequest.of(currentPage, pageSize);
-    	System.out.println("Page Set");
     	resp.setTotalFlights(flightRepository.count());
-    	System.out.println("Total Count Set");
     	if(filterString.isEmpty()) {
     		resp.setData(flightRepository.findAll(pageRequest).getContent());
     		resp.setTotalFiltered(resp.getTotalFlights());
@@ -52,7 +50,6 @@ public class FlightService {
     		resp.setData(searchPageableByCriterion(filterString, pageRequest));
     		resp.setTotalFiltered(countOfPageableByCriterion(filterString, pageRequest));
     	}
-    	System.out.println("Data Set");
     	return resp;
     }
     
