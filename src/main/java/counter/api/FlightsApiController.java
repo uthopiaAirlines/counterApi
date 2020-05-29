@@ -32,7 +32,7 @@ public class FlightsApiController implements FlightsApi {
     }
 
     @Override
-    @CrossOrigin()
+    @CrossOrigin("https://www.utopiaairlines.com")
     public ResponseEntity<FlightResp> flightsGet(@RequestParam(defaultValue = "20") int pageSize, @RequestParam(defaultValue = "1") int currentPage,
     		@RequestParam String filterString, @RequestParam(defaultValue = "true") boolean isAsc, @RequestParam(defaultValue = "flightId") String sortItem) {
     	if(!sortItem.equals("flightId")&&!sortItem.equals("arrivalTime")&&!sortItem.equals("departureTime")&&!sortItem.equals("availableSeats")&&
