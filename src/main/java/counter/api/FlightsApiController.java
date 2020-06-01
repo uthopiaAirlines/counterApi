@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import counter.model.FlightResp;
 import counter.service.FlightService;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-16T22:58:40.224Z[GMT]")
-@CrossOrigin("https://www.utopiaairlines.com")
+@CrossOrigin(origins = "https://www.utopiaairlines.com")
 @Controller
 public class FlightsApiController implements FlightsApi {
 
