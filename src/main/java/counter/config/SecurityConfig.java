@@ -11,13 +11,15 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.cors().and().authorizeRequests().antMatchers("/v2/counter/flights**").permitAll().anyRequest().hasRole("Counter")
+    http.cors().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        .and().authorizeRequests().antMatchers("/v2/counter/flights**").permitAll().anyRequest().hasRole("Counter")
         .and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(new JwtAuthenticationConverter() {
           @Override
           protected Collection<GrantedAuthority> extractAuthorities(final Jwt jwt) {
