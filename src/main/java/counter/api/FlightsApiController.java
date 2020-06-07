@@ -39,8 +39,6 @@ public class FlightsApiController implements FlightsApi {
 				!sortItem.equals("price")&&!sortItem.equals("airline")&&!sortItem.equals("arrivalLocation")&&!sortItem.equals("departureLocation"))
     		return new ResponseEntity<FlightResp>(HttpStatus.BAD_REQUEST);
         FlightResp result = flightService.getFlights(pageSize, currentPage, filterString, isAsc, sortItem);
-        if (result.getData().isEmpty())
-            return new ResponseEntity<FlightResp>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<FlightResp>(result, HttpStatus.OK);
     }
 
